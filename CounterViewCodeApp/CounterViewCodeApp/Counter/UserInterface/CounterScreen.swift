@@ -45,4 +45,49 @@ class CounterScreen: UIView {
         
         return button
     }()
+    
+    init() {
+        super.init(frame: .zero)
+        setupView()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//MARK: - Configuration Screen
+extension CounterScreen {
+    
+    private func setupView() {
+        addSubviews()
+        disableTranslatesAutoreszingMaskInAllElements()
+        setupConstraints()
+    }
+    
+    private func addSubviews() {
+        addSubview(counterValueLabel)
+        addSubview(incrementButton)
+        addSubview(decrementButton)
+    }
+    
+    private func disableTranslatesAutoreszingMaskInAllElements() {
+        subviews.forEach { subview in
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            counterValueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            counterValueLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            incrementButton.topAnchor.constraint(equalTo: counterValueLabel.bottomAnchor, constant: 16),
+            incrementButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            incrementButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            
+            decrementButton.topAnchor.constraint(equalTo: incrementButton.bottomAnchor, constant: 16),
+            decrementButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            decrementButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+        ])
+    }
 }
