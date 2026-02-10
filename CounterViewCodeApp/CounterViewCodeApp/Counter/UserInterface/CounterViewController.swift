@@ -9,8 +9,8 @@ import UIKit
 
 class CounterViewController: UIViewController {
     
-    private let viewModel: CounterViewModel
-    private let contentView: CounterScreen
+    private var viewModel: CounterViewModel
+    private var contentView: CounterScreen
     
     init(viewModel: CounterViewModel, view: CounterScreen) {
         self.viewModel = viewModel
@@ -27,6 +27,24 @@ class CounterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.delegate = self
+        updateCounterWhenClickTheButtons()
+    }
+    
+    private func updateCounterWhenClickTheButtons() {
+        viewModel.onCountValueChange = { [weak self] newValue in
+            self?.contentView.value = String(newValue)
+        }
     }
 }
 
+extension CounterViewController: CounterScreenDelegateProtocol {
+    
+    func tappedIncrementButton() {
+        viewModel.incrementValue()
+    }
+    
+    func tappedDecrementButton() {
+        viewModel.decrementValue()
+    }
+}

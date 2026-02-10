@@ -9,12 +9,15 @@ import UIKit
 
 class CounterScreen: UIView {
     
+    var value: String?
+    weak var delegate: CounterScreenDelegateProtocol?
+    
     private let defaultValue: String = "0"
-        
+    
     private lazy var counterValueLabel: UILabel = {
         let label = UILabel()
         
-        label.text = defaultValue
+        label.text = value != nil ? value : defaultValue
         label.font = .boldSystemFont(ofSize: 24)
         
         return label
@@ -29,6 +32,7 @@ class CounterScreen: UIView {
         
         button.backgroundColor = .green
         button.layer.cornerRadius = 16
+        button.addTarget(CounterScreen.self, action: #selector(incrementCounterValueButtonAction), for: .touchUpInside)
         
         return button
     }()
@@ -42,6 +46,7 @@ class CounterScreen: UIView {
         
         button.backgroundColor = .red
         button.layer.cornerRadius = 16
+        button.addTarget(CounterScreen.self, action: #selector(decrementCounterValueButtonAction), for: .touchUpInside)
         
         return button
     }()
@@ -52,6 +57,13 @@ class CounterScreen: UIView {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func incrementCounterValueButtonAction() {
+        delegate?.tappedIncrementButton()
+    }
+    @objc private func decrementCounterValueButtonAction() {
+        delegate?.tappedDecrementButton()
     }
 }
 
