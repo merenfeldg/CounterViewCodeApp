@@ -34,7 +34,7 @@ class CounterViewController: UIViewController {
     
     private func updateCounterWhenClickTheButtons() {
         viewModel.onCountValueChange = { [weak self] newValue in
-            self?.contentView.value = String(newValue)
+            self?.contentView.counterValue = String(newValue)
         }
     }
 }

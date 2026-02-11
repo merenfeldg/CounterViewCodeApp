@@ -9,7 +9,11 @@ import UIKit
 
 class CounterScreen: UIView {
     
-    var value: String?
+    var counterValue: String = "0" {
+        didSet {
+            counterValueLabel.text = counterValue
+        }
+    }
     weak var delegate: CounterScreenDelegateProtocol?
     
     private let defaultValue: String = "0"
@@ -17,7 +21,7 @@ class CounterScreen: UIView {
     private lazy var counterValueLabel: UILabel = {
         let label = UILabel()
         
-        label.text = value != nil ? value : defaultValue
+        label.text = counterValue
         label.font = .boldSystemFont(ofSize: 24)
         
         return label
@@ -32,7 +36,6 @@ class CounterScreen: UIView {
         
         button.backgroundColor = .green
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(incrementCounterValueButtonAction), for: .touchUpInside)
         
         return button
     }()
@@ -46,7 +49,6 @@ class CounterScreen: UIView {
         
         button.backgroundColor = .red
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(decrementCounterValueButtonAction), for: .touchUpInside)
         
         return button
     }()
@@ -74,6 +76,7 @@ extension CounterScreen {
         addSubviews()
         disableTranslatesAutoreszingMaskInAllElements()
         setupConstraints()
+        configActions()
     }
     
     private func addSubviews() {
@@ -101,5 +104,11 @@ extension CounterScreen {
             decrementButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             decrementButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
         ])
+    }
+    
+    private func configActions() {
+        incrementButton.addTarget(self, action: #selector(incrementCounterValueButtonAction), for: .touchUpInside)
+        
+        decrementButton.addTarget(self, action: #selector(decrementCounterValueButtonAction), for: .touchUpInside)
     }
 }
