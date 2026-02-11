@@ -16,8 +16,6 @@ class CounterScreen: UIView {
     }
     weak var delegate: CounterScreenDelegateProtocol?
     
-    private let defaultValue: String = "0"
-    
     private lazy var counterValueLabel: UILabel = {
         let label = UILabel()
         
