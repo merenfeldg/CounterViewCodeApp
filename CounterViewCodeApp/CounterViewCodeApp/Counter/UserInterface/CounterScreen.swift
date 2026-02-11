@@ -25,7 +25,7 @@ class CounterScreen: UIView {
         return label
     }()
     
-    private let incrementButton: UIButton = {
+    private lazy var incrementButton: UIButton = {
         let button = UIButton(type: .system)
         
         button.setTitle("INCREMENT +", for: .normal)
@@ -38,7 +38,7 @@ class CounterScreen: UIView {
         return button
     }()
     
-    private let decrementButton: UIButton = {
+    private lazy var decrementButton: UIButton = {
         let button = UIButton(type: .system)
         
         button.setTitle("DECREMENT -", for: .normal)
