@@ -29,6 +29,7 @@ class CounterViewController: UIViewController {
         super.viewDidLoad()
         contentView.delegate = self
         updateCounterWhenClickTheButtons()
+        view.backgroundColor = .white
     }
     
     private func updateCounterWhenClickTheButtons() {

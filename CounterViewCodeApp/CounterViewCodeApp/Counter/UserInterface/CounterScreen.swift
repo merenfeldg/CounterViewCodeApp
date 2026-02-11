@@ -27,12 +27,12 @@ class CounterScreen: UIView {
         let button = UIButton(type: .system)
         
         button.setTitle("INCREMENT +", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
         button.backgroundColor = .green
         button.layer.cornerRadius = 16
-        button.addTarget(CounterScreen.self, action: #selector(incrementCounterValueButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(incrementCounterValueButtonAction), for: .touchUpInside)
         
         return button
     }()
@@ -46,7 +46,7 @@ class CounterScreen: UIView {
         
         button.backgroundColor = .red
         button.layer.cornerRadius = 16
-        button.addTarget(CounterScreen.self, action: #selector(decrementCounterValueButtonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(decrementCounterValueButtonAction), for: .touchUpInside)
         
         return button
     }()
